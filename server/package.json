@@ -1,0 +1,27 @@
+{
+  "name": "gdocs-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "www.github.com/loeklj/gdocs",
+  "author": "Loek Janssen",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node -r @std/esm ./index.js",
+    "ngrok": "ngrok start -config=./ngrok.yml --all"
+  },
+  "dependencies": {
+    "@std/esm": "^0.11.2",
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.1",
+    "node-fetch": "^1.7.3",
+    "nodegit": "^0.20.3",
+    "socket.io": "^2.0.4"
+  },
+  "@std/esm": {
+    "await": true,
+    "esm": "js",
+    "cjs": true
+  }
+}
