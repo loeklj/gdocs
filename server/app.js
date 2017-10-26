@@ -5,6 +5,7 @@ import routes from './routes';
 
 const app = express();
 app.use(bodyParser.json());
+app.use(express.static('public'))
 
 // attach routes
 routes(app);
