@@ -1,4 +1,4 @@
-'use strict';;let nodegit;_e02‍.w('nodegit',[["default",function(v){nodegit=v}]]);let fs;_e02‍.w('fs',[["default",function(v){fs=v}]]);let child_process;_e02‍.w('child_process',[["default",function(v){child_process=v}]]);
+'use strict';;let nodegit;_fff‍.w('nodegit',[["default",function(v){nodegit=v}]]);let fs;_fff‍.w('fs',[["default",function(v){fs=v}]]);let child_process;_fff‍.w('child_process',[["default",function(v){child_process=v}]]);
 
 
 
@@ -34,12 +34,19 @@ function get(req, res){
 // }
 
 function edit(req, res){
-  console.log('edit method');
-  res.end()
+  let text = req.body.text;
+  fs.readFile('./doc/doc.txt', (err, data) => {
+    if (err) return res.json(err);
+    if (text === data) return res.end(null);
 
+    fs.writeFile('./doc.doc.txt', text, (err, data) => {
+      if (err) return res.json(err);
+      res.json({ok: true});
+    });
+  });
 }
 
-_e02‍.d({
+_fff‍.d({
   get,
   edit
 });

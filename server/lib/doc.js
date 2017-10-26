@@ -34,9 +34,17 @@ function get(req, res){
 // }
 
 function edit(req, res){
-  console.log('edit method');
-  res.end()
+  console.log('edit fn called');
+  let text = req.body.text;
+  fs.readFile('./doc/doc.txt', (err, data) => {
+    if (err) return res.json(err);
+    if (text === data) return res.end(null);
 
+    fs.writeFile('./doc.doc.txt', text, (err, data) => {
+      if (err) return res.json(err);
+      res.json({ok: true});
+    });
+  });
 }
 
 export default {
