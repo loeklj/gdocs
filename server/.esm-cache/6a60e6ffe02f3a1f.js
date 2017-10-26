@@ -1,8 +1,8 @@
-'use strict';
+'use strict';;let nodegit;_e02‍.w('nodegit',[["default",function(v){nodegit=v}]]);let fs;_e02‍.w('fs',[["default",function(v){fs=v}]]);let child_process;_e02‍.w('child_process',[["default",function(v){child_process=v}]]);
 
-import nodegit from 'nodegit';
-import fs from 'fs';
-import child_process from 'child_process';
+
+
+
 
 
 
@@ -39,7 +39,7 @@ function edit(req, res){
 
 }
 
-export default {
+_e02‍.d({
   get,
   edit
-};
+});
