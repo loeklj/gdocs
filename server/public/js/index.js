@@ -2,7 +2,7 @@ const ENDPOINTS = {
 	SYNC: {
 		url: '/doc',
 		options: ({ headers }) => ({
-			method: 'PUT',
+			method: 'GET',
 			headers,
 		}),
 	},
@@ -28,6 +28,13 @@ const timerCache = {
 };
 
 const sync = () => fetch(ENDPOINTS.SYNC.url, ENDPOINTS.SYNC.options({ headers: undefined }))
+	.then((data) => data.body)
+	.catch((err) => {
+		console.log(err);
+	});
+
+const edit = () => fetch(ENDPOINTS.EDIT.url, ENDPOINTS.EDIT.options({ headers: undefined }))
+	.then((data) => data.body)
 	.catch((err) => {
 		console.log(err);
 	});
@@ -40,14 +47,21 @@ const checkEdit = (newText) => {
 
 	// check for changes
 	if (cache.text !== newText) {
-		
+		edit().then((data) => {
+			// do not update with local text, rely on server-decided diffing / resolving
+			cache.text === data;
+			cache.novaDoc.innerHTML = data;
+
+			console.log('Edit Updated!');
+		})
 	}
 }
 
+const clearIntervals = () => timerCache.edit.forEach((timerID) => clearInterval(timerID));
 
 const setup = () => {
 	// get doc element
-	const novaDoc = docoument.getElementById('novadoc');
+	const novaDoc = document.getElementById('novadoc');
 	cache.novaDoc = novaDoc;
 
 	// start edit timer instantly
@@ -63,8 +77,8 @@ $(document).ready(() => {
 	sync().then((data) => {
 		console.log(data);
 		if (data) {
-			DOMCache.novaDoc.innerHTML = data;
-			console.log('Updated!');
+			cache.novaDoc.innerHTML = data;
+			console.log('Sync Updated!');
 		}
 	})
 })
